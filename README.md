@@ -258,21 +258,6 @@ npm run dev
 | GET | `/health` | Backend health status |
 | GET | `/models` | Available LLM providers |
 
-------------------------------------------------------------------------
-
-## 🛣️ Roadmap
-
--   [x] Document Retrieval
--   [x] Live Web Search
--   [x] Multi-LLM Support
--   [x] Citations & Evidence
--   [x] Health Dashboard
--   [ ] Streaming Responses
--   [ ] Authentication
--   [ ] MCP Integrations
--   [ ] Cloud Deployment
-
-------------------------------------------------------------------------
 
 ## 📸 Screenshots
 
