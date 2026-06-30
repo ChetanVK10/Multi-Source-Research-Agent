@@ -2,6 +2,8 @@ import { Activity, Database, GitBranch, Server, Waypoints } from 'lucide-react'
 import { StatusCard } from '../components/StatusCard'
 import { Skeleton } from '../components/Skeleton'
 import { useHealthQuery } from '../hooks/useResearch'
+import { Globe } from "lucide-react"
+import { BrainCircuit } from "lucide-react"
 
 export function HealthDashboardPage() {
   const health = useHealthQuery()
@@ -19,40 +21,46 @@ export function HealthDashboardPage() {
   return (
     <div className="space-y-6">
       <section className="rounded-lg border border-white/10 bg-surface p-5">
-        <p className="text-sm font-semibold text-slate-100">Runtime overview</p>
+        <p className="text-sm font-semibold text-slate-100">Runtime Status</p>
         <p className="mt-1 text-sm text-slate-500">
-          Health data is read from `/health`. Dependent service cards reflect configured backend capabilities and should be upgraded when dedicated probes are exposed.
+        Current runtime status of the application services.
         </p>
       </section>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        
         <StatusCard
-          title="Backend"
-          value={backendOk ? 'Operational' : 'Unavailable'}
-          detail={health.data ? `${health.data.app_name} v${health.data.app_version}` : 'Unable to reach FastAPI.'}
-          status={backendOk ? 'ok' : 'error'}
-          icon={Server}
-        />
+            title="Backend"
+            value={backendOk ? "Operational" : "Offline"}
+            detail={
+              health.data
+                ? "FastAPI backend with LangGraph orchestration."
+                : "Unable to connect to backend."
+       }   
+       status={backendOk ? "ok" : "error"}
+       icon={Server}
+      />      
         <StatusCard
           title="Qdrant"
           value={backendOk ? 'Configured' : 'Unknown'}
-          detail="Document retrieval is available through the backend workflow when vector settings are configured."
+          detail="Vector database storing document embeddings for semantic retrieval."
           status={backendOk ? 'ok' : 'unknown'}
           icon={Waypoints}
         />
         <StatusCard
-          title="PostgreSQL"
-          value={backendOk ? 'Routable' : 'Unknown'}
-          detail="SQL retrieval is routed by LangGraph and validated server-side before execution."
-          status={backendOk ? 'ok' : 'unknown'}
-          icon={Database}
-        />
+  title="Web Search"
+  value={backendOk ? "Operational" : "Offline"}
+  detail="Tavily Search API for real-time web retrieval."
+  status={backendOk ? "ok" : "error"}
+  icon={Globe}
+/>
         <StatusCard
-          title="LangSmith"
-          value={backendOk ? 'Backend controlled' : 'Unknown'}
-          detail="Tracing state depends on backend environment variables and LangSmith credentials."
-          status="warning"
-          icon={GitBranch}
-        />
+  title="Embeddings"
+  value={backendOk ? "Ready" : "Unavailable"}
+  detail="BAAI/bge-small-en-v1.5 for semantic document embeddings."
+  status={backendOk ? "ok" : "error"}
+  icon={BrainCircuit}
+/>
+
       </div>
       <section className="rounded-lg border border-white/10 bg-card p-5">
         <div className="flex items-center gap-3">

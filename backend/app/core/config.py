@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     fallback_model: str = "gemini-2.5-flash"
 
     embedding_model: str = "BAAI/bge-base-en-v1.5"
-    
+
     langsmith_tracing: bool = False
     langsmith_api_key: SecretStr | None = None
     langsmith_project: str = "multi-source-research-agent"
