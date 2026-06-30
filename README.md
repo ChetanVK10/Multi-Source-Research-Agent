@@ -2,19 +2,16 @@
 
 > **An Agentic AI Research Assistant for Grounded Knowledge Retrieval**
 
-```{=html}
 <p align="center">
-```
-`<strong>`{=html}Retrieve knowledge from uploaded documents and the live
-web using an intelligent LangGraph
-workflow.`</strong>`{=html}`<br>`{=html} Generate grounded answers with
-citations and supporting evidence.
-```{=html}
+  <strong>
+    Retrieve knowledge from uploaded documents and the live web using an intelligent LangGraph workflow.
+  </strong>
+  <br>
+  Generate grounded answers with citations and supporting evidence.
 </p>
-```
-```{=html}
+
 <p align="center">
-```
+
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi)
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react)
@@ -24,12 +21,9 @@ citations and supporting evidence.
 ![Groq](https://img.shields.io/badge/Groq-LLM-black?style=for-the-badge)
 ![Gemini](https://img.shields.io/badge/Gemini-LLM-4285F4?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker)
-![MIT
-License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-```{=html}
 </p>
-```
 
 ------------------------------------------------------------------------
 
