@@ -1,380 +1,301 @@
-# Multi-Source Research Agent
+# 🔍 Multi-Source Research Agent
 
-Production-ready GenAI research system that plans source usage, retrieves evidence from multiple sources, reranks evidence, and synthesizes grounded answers with citations.
+> **An Agentic AI Research Assistant for Grounded Knowledge Retrieval**
 
-## Architecture
+```{=html}
+<p align="center">
+```
+`<strong>`{=html}Retrieve knowledge from uploaded documents and the live
+web using an intelligent LangGraph
+workflow.`</strong>`{=html}`<br>`{=html} Generate grounded answers with
+citations and supporting evidence.
+```{=html}
+</p>
+```
+```{=html}
+<p align="center">
+```
+![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript)
+![LangGraph](https://img.shields.io/badge/LangGraph-Agentic_AI-purple?style=for-the-badge)
+![Qdrant](https://img.shields.io/badge/Qdrant-Vector_DB-red?style=for-the-badge)
+![Groq](https://img.shields.io/badge/Groq-LLM-black?style=for-the-badge)
+![Gemini](https://img.shields.io/badge/Gemini-LLM-4285F4?style=for-the-badge)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker)
+![MIT
+License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-```text
+```{=html}
+</p>
+```
+
+------------------------------------------------------------------------
+
+## 📖 Overview
+
+**Multi-Source Research Agent** is an agentic AI application that
+combines **document retrieval**, **live web search**, and **multiple LLM
+providers** into a single research workflow.
+
+Unlike traditional chatbots that rely only on model knowledge, this
+system retrieves relevant information from uploaded documents and the
+web, reranks the retrieved evidence using a cross-encoder model, and
+synthesizes grounded responses with citations.
+
+The workflow is orchestrated with **LangGraph**, enabling modular
+reasoning and easy extensibility.
+
+------------------------------------------------------------------------
+
+## ✨ Features
+
+  Feature                              Status
+  ----------------------------------- --------
+  PDF & TXT Upload                       ✅
+  Semantic Search                        ✅
+  Qdrant Vector Database                 ✅
+  Live Web Search (Tavily)               ✅
+  LangGraph Orchestration                ✅
+  Cross-Encoder Reranking                ✅
+  Multi-LLM Support (Groq & Gemini)      ✅
+  Citations & Evidence                   ✅
+  Conversation History                   ✅
+  Document Management                    ✅
+  Health Dashboard                       ✅
+
+------------------------------------------------------------------------
+
+## 🏗️ Architecture
+
+``` mermaid
+flowchart TD
+    U[User]
+    F[React + Vite Frontend]
+    B[FastAPI Backend]
+    G[LangGraph Workflow]
+    D[Document Retriever]
+    W[Web Retriever]
+    Q[Qdrant]
+    T[Tavily Search]
+    R[Cross-Encoder Reranker]
+    S[Response Synthesizer]
+    L[Groq / Gemini]
+    A[Grounded Answer + Citations]
+
+    U-->F-->B-->G
+    G-->D-->Q
+    G-->W-->T
+    D-->R
+    W-->R
+    R-->S-->L-->A
+```
+
+------------------------------------------------------------------------
+
+## 🔄 LangGraph Workflow
+
+``` text
 User Query
-  |
-  v
-FastAPI API Layer
-  |
-  v
-Planner Node
-  |
-  v
-Conditional Router
-  |
-  +--> Documents Retrieval -> Qdrant
-  |
-  +--> Web Retrieval -------> Tavily Search API
-  |
-  +--> SQL Retrieval --------> PostgreSQL
-  |
-  v
-Merge Node
-  |
-  v
-Cross-Encoder Reranker Node
-  |
-  v
-Synthesizer Node
-  |
-  v
+    │
+ Planner
+    │
+ Router
+ ┌──┴─────────┐
+ │            │
+Document   Web Search
+Retriever  Retriever
+ │            │
+ └─────┬──────┘
+       │
+ Evidence Merge
+       │
+Cross-Encoder Reranker
+       │
+ Response Synthesizer
+       │
 Final Answer + Citations
 ```
 
-Phase 1 includes the project structure, backend configuration, environment management, FastAPI setup, and LangGraph state definition.
+------------------------------------------------------------------------
 
-Phase 2 adds the planner node, router node, and LangGraph workflow.
+## 🛠️ Tech Stack
 
-Phase 3 adds Qdrant integration, Gemini embeddings, document ingestion, chunking, upload, indexing, and document retrieval.
+### Frontend
 
-Phase 4 adds a web search tool wrapper, Tavily integration, web evidence normalization, web retrieval node, and recoverable tool error handling.
+-   React
+-   TypeScript
+-   Vite
 
-Phase 5 adds PostgreSQL integration, constrained SQL query generation, validation guardrails, execution, and SQL evidence retrieval.
+### Backend
 
-Phase 6 adds evidence merging, cross-encoder reranking, lexical fallback reranking, and top-k context selection.
+-   FastAPI
+-   LangGraph
 
-Phase 7 adds grounded answer synthesis, citation generation, inline citation enforcement, and insufficient-evidence handling.
+### AI
 
-## Project Structure
+-   Groq
+-   Gemini
+-   BAAI/bge-small-en-v1.5 Embeddings
+-   Cross-Encoder Reranker
 
-```text
-multi-source-research-agent/
-|-- backend/
-|   |-- app/
-|   |   |-- api/
-|   |   |   |-- v1/
-|   |   |   |   |-- routes/
-|   |   |   |   |   |-- chat.py
-|   |   |   |   |   |-- documents.py
-|   |   |   |   |   |-- health.py
-|   |   |   |   |-- router.py
-|   |   |   |-- deps.py
-|   |   |-- core/
-|   |   |   |-- config.py
-|   |   |   |-- errors.py
-|   |   |   |-- logging.py
-|   |   |-- graph/
-|   |   |   |-- architecture.py
-|   |   |   |-- builder.py
-|   |   |   |-- nodes/
-|   |   |   |   |-- document_retriever.py
-|   |   |   |   |-- merge.py
-|   |   |   |   |-- planner.py
-|   |   |   |   |-- reranker.py
-|   |   |   |   |-- router.py
-|   |   |   |   |-- sql_retriever.py
-|   |   |   |   |-- synthesizer.py
-|   |   |   |   |-- web_retriever.py
-|   |   |   |-- state.py
-|   |   |-- ingestion/
-|   |   |   |-- chunking.py
-|   |   |   |-- loaders.py
-|   |   |   |-- pipeline.py
-|   |   |-- models/
-|   |   |   |-- citations.py
-|   |   |   |-- documents.py
-|   |   |   |-- evidence.py
-|   |   |   |-- requests.py
-|   |   |   |-- responses.py
-|   |   |   |-- sql.py
-|   |   |   |-- synthesis.py
-|   |   |   |-- web.py
-|   |   |-- services/
-|   |   |   |-- embeddings/
-|   |   |   |   |-- embedding_service.py
-|   |   |   |-- llm/
-|   |   |   |   |-- gemini_client.py
-|   |   |   |   |-- prompts.py
-|   |   |   |-- synthesis/
-|   |   |   |   |-- citations.py
-|   |   |   |   |-- synthesizer.py
-|   |   |   |-- vectorstore/
-|   |   |   |   |-- document_indexer.py
-|   |   |   |   |-- factory.py
-|   |   |   |   |-- qdrant_client.py
-|   |   |   |-- web/
-|   |   |   |   |-- factory.py
-|   |   |   |   |-- retriever.py
-|   |   |   |   |-- search_tool.py
-|   |   |   |   |-- tavily_tool.py
-|   |   |   |-- sql/
-|   |   |   |   |-- db.py
-|   |   |   |   |-- factory.py
-|   |   |   |   |-- query_generator.py
-|   |   |   |   |-- retriever.py
-|   |   |   |   |-- validator.py
-|   |   |   |-- reranking/
-|   |   |   |   |-- reranker.py
-|   |   |-- utils/
-|   |   |   |-- ids.py
-|   |   |-- main.py
-|   |-- tests/
-|   |-- Dockerfile
-|   |-- pyproject.toml
-|   |-- README.md
-|-- frontend/
-|   |-- src/
-|   |-- README.md
-|-- infra/
-|   |-- env/
-|   |   |-- backend.env.example
-|   |   |-- frontend.env.example
-|   |-- render/
-|   |   |-- render.yaml
-|-- docs/
-|   |-- architecture.md
-|-- docker-compose.yml
-|-- README.md
+### Retrieval
+
+-   Qdrant
+-   Tavily Search
+
+### Storage
+
+-   SQLite
+
+### Deployment
+
+-   Docker
+
+------------------------------------------------------------------------
+
+## 📂 Project Structure
+
+``` text
+backend/
+ ├── app/
+ │   ├── api/
+ │   ├── graph/
+ │   ├── services/
+ │   └── models/
+
+frontend/
+ ├── src/
+ │   ├── components/
+ │   ├── hooks/
+ │   ├── pages/
+ │   └── services/
+
+docs/
+infra/
+docker-compose.yml
+README.md
 ```
 
-# MANUAL CHANGES REQUIRED
+------------------------------------------------------------------------
 
-## API Keys
+## 🚀 Installation
 
-- Create a Google Gemini API key.
-- Create a LangSmith API key.
-- Create a Tavily API key for Phase 4 web retrieval.
-- Create a Qdrant API key if using Qdrant Cloud.
-- Phase 3 requires `GEMINI_API_KEY` for document embeddings.
-- Phase 4 requires `WEB_SEARCH_API_KEY` when the planner routes a query to web search.
-- Phase 5 does not require a new API key, but it requires PostgreSQL credentials in `DATABASE_URL`.
-- Phase 6 may download the configured cross-encoder model from Hugging Face during first runtime use.
-- Phase 7 requires `GEMINI_API_KEY` for model-based answer synthesis. If Gemini is unavailable, the system returns extractive grounded snippets instead of guessing.
+``` bash
+git clone https://github.com/<username>/Multi-Source-Research-Agent.git
+cd Multi-Source-Research-Agent
+```
 
-## Environment Variables
+### Backend
 
-Copy `infra/env/backend.env.example` into a local backend `.env` file before running the backend.
+``` bash
+python -m venv .venv
 
-Required backend variables:
+# Windows
+.venv\Scripts\activate
 
-- `APP_ENV`
-- `APP_NAME`
-- `API_V1_PREFIX`
-- `BACKEND_CORS_ORIGINS`
-- `GEMINI_API_KEY`
-- `GEMINI_MODEL`
-- `GEMINI_EMBEDDING_MODEL`
-- `GEMINI_TEMPERATURE`
-- `LANGSMITH_TRACING`
-- `LANGSMITH_API_KEY`
-- `LANGSMITH_PROJECT`
-- `QDRANT_URL`
-- `QDRANT_API_KEY`
-- `QDRANT_COLLECTION_NAME`
-- `QDRANT_VECTOR_SIZE`
-- `QDRANT_DISTANCE_METRIC`
-- `DOCUMENT_CHUNK_SIZE`
-- `DOCUMENT_CHUNK_OVERLAP`
-- `DOCUMENT_RETRIEVAL_TOP_K`
-- `DATABASE_URL`
-- `SQL_ALLOWED_TABLES`
-- `SQL_DEFAULT_TABLE`
-- `SQL_RESULT_LIMIT`
-- `SQL_STATEMENT_TIMEOUT_MS`
-- `WEB_SEARCH_PROVIDER`
-- `WEB_SEARCH_API_KEY`
-- `WEB_SEARCH_TOP_K`
-- `WEB_SEARCH_TIMEOUT_SECONDS`
-- `RERANKER_MODEL_NAME`
-- `RERANKER_TOP_K`
-- `RERANKER_BATCH_SIZE`
-- `RERANKER_FALLBACK_ENABLED`
-- `SYNTHESIS_MAX_CONTEXT_CHARS`
-- `SYNTHESIS_REQUIRE_CITATIONS`
+pip install -r requirements.txt
+```
 
-Required frontend variables:
+### Frontend
 
-- `VITE_API_BASE_URL`
-
-## MCP Configuration
-
-No MCP server is required for Phase 5.
-
-Web search currently uses the Tavily HTTP API directly through an internal tool wrapper. If Tavily is later replaced with an MCP search server, update the web tool factory and deployment configuration.
-
-Later phases may require MCP configuration for:
-
-- Document or filesystem access
-
-## Deployment Configuration
-
-Render configuration in `infra/render/render.yaml` is a placeholder and must be reviewed before production deployment.
-
-Manual deployment edits required:
-
-- Backend service name
-- Frontend service name
-- Environment variables
-- Build commands
-- Start commands
-- Region
-- Instance size
-- Persistent database and vector database strategy
-- Tavily API key secret
-- PostgreSQL credentials
-- Cross-encoder model download/cache strategy
-- Gemini API key secret
-
-## Database Setup
-
-SQL retrieval is implemented in Phase 5.
-
-Required setup:
-
-- Provision a SQL database.
-- Create application tables.
-- Configure `DATABASE_URL`.
-- Prefer read-only credentials for agent query execution.
-- Set `SQL_ALLOWED_TABLES` to a comma-separated allowlist of tables the agent may query.
-- Optionally set `SQL_DEFAULT_TABLE` to bias query generation.
-- Tune `SQL_RESULT_LIMIT`.
-- Tune `SQL_STATEMENT_TIMEOUT_MS`.
-- Add migrations once the schema is finalized.
-
-The SQL retriever only generates and validates read-only `SELECT` statements. Destructive SQL keywords are blocked, and referenced tables must be present in `SQL_ALLOWED_TABLES`.
-
-## Vector Database Setup
-
-Qdrant retrieval is implemented in Phase 3.
-
-Required setup:
-
-- Provision Qdrant Cloud or a self-hosted Qdrant instance.
-- Set `QDRANT_URL`.
-- Set `QDRANT_API_KEY` if using Qdrant Cloud.
-- Set `QDRANT_COLLECTION_NAME`.
-- Match `QDRANT_VECTOR_SIZE` to `GEMINI_EMBEDDING_MODEL`.
-- Keep `QDRANT_DISTANCE_METRIC=Cosine` unless there is a model-specific reason to change it.
-- Upload `.txt`, `.md`, or `.pdf` files through `/api/v1/documents/upload`.
-
-## Web Search Setup
-
-Web retrieval is implemented in Phase 4.
-
-Required setup:
-
-- Create a Tavily API key.
-- Set `WEB_SEARCH_PROVIDER=tavily`.
-- Set `WEB_SEARCH_API_KEY`.
-- Tune `WEB_SEARCH_TOP_K` for the desired number of web results.
-- Tune `WEB_SEARCH_TIMEOUT_SECONDS` for deployment latency tolerance.
-
-## Reranker Setup
-
-Cross-encoder reranking is implemented in Phase 6.
-
-Required setup:
-
-- Set `RERANKER_MODEL_NAME`.
-- Keep `RERANKER_FALLBACK_ENABLED=true` if the app should continue with lexical ranking when the cross-encoder is unavailable.
-- Tune `RERANKER_TOP_K` for the number of evidence chunks passed to synthesis.
-- Tune `RERANKER_BATCH_SIZE` based on CPU/RAM limits.
-- Ensure the deployment environment can download/cache the sentence-transformers model, or pre-bake the model into the Docker image in a later production hardening phase.
-
-## Synthesis Setup
-
-Grounded answer synthesis is implemented in Phase 7.
-
-Required setup:
-
-- Set `GEMINI_API_KEY`.
-- Set `GEMINI_MODEL`.
-- Keep `GEMINI_TEMPERATURE` low for factual synthesis.
-- Tune `SYNTHESIS_MAX_CONTEXT_CHARS` to control context size and latency.
-- Keep `SYNTHESIS_REQUIRE_CITATIONS=true` for production.
-
-## Multi-Provider LLM Setup & Registry
-
-The system supports dynamically selecting the LLM provider and model for grounded answer synthesis from the frontend UI.
-
-### Providers & Models
-- **Gemini**: `gemini-2.5-flash`, `gemini-2.5-pro`
-- **Groq**: `llama-3.3-70b-versatile`, `deepseek-r1-distill-llama-70b`, `qwen-qwq-32b`
-
-### Environment Variables
-Configure the following options in your backend `.env` file:
-- `GROQ_API_KEY`: API key for Groq synthesis.
-- `DEFAULT_PROVIDER`: Default primary provider (e.g. `gemini`).
-- `DEFAULT_MODEL`: Default primary model (e.g. `gemini-2.5-flash`).
-- `FALLBACK_PROVIDER`: Fallback provider (e.g. `groq`).
-- `FALLBACK_MODEL`: Fallback model (e.g. `llama-3.3-70b-versatile`).
-
-### Graceful Fallback Strategy
-- **Configuration Fallback**: If a selected provider's credentials are not configured at runtime, the initialization immediately routes to the secondary provider/model.
-- **Runtime Fallback**: If the primary client call raises an exception (e.g. rate limit, API outage), the client wrapper catches the error and executes the query using the fallback client.
-- **Observability**: The actually used provider and model are tracked in the LangGraph state, returned in the REST API chat response payload, and rendered in assistant chat message bubbles.
-
-Hallucination reduction behavior:
-
-- The synthesizer receives only reranked evidence.
-- Citations are generated from retrieved evidence, not model output.
-- Invalid citation IDs are stripped from the answer.
-- If no evidence is available, the system returns an insufficient-evidence answer.
-- If Gemini fails, the system returns extractive snippets from evidence with citations.
-
-## Manual Edits
-
-Before production use, review:
-
-- CORS origins
-- Authentication and authorization
-- Rate limits
-- Upload size limits
-- Logging level
-- LangSmith project name
-- Render service configuration
-- Secret management strategy
-- Web search result usage and compliance requirements
-- Reranker model licensing, memory footprint, and cold-start time
-- Gemini model cost, latency, quota, and safety settings
-
-# Frontend Setup
-
-The `frontend/` app is a React, TypeScript, Vite, Tailwind CSS, Axios, and React Query dashboard for the existing FastAPI backend.
-
-```bash
+``` bash
 cd frontend
 npm install
+```
+
+### Start Qdrant
+
+``` bash
+docker compose up -d qdrant
+```
+
+------------------------------------------------------------------------
+
+## 🔑 Environment Variables
+
+Create a `.env` file:
+
+``` env
+GROQ_API_KEY=
+GOOGLE_API_KEY=
+TAVILY_API_KEY=
+
+QDRANT_URL=http://localhost:6333
+QDRANT_API_KEY=
+
+DEFAULT_PROVIDER=groq
+FALLBACK_PROVIDER=gemini
+```
+
+------------------------------------------------------------------------
+
+## ▶️ Run the Project
+
+``` bash
+# Backend
+uvicorn app.main:app --reload
+
+# Frontend
 npm run dev
-npm run build
 ```
 
-Create `frontend/.env`:
+------------------------------------------------------------------------
 
-```bash
-VITE_API_BASE_URL=http://localhost:8000/api/v1
-```
+## 💬 Example Queries
 
-Backend connection defaults:
+-   Summarize this uploaded research paper.
+-   Compare the uploaded documents.
+-   Explain Retrieval-Augmented Generation.
+-   Search the web for the latest AI developments.
+-   List the certifications mentioned in my resume.
 
-- FastAPI base URL: `http://localhost:8000`
-- API v1 prefix: `/api/v1`
-- Frontend API base URL: `http://localhost:8000/api/v1`
+------------------------------------------------------------------------
 
-Connected frontend routes:
+## 🌐 API Endpoints
 
-- Research chat uses `POST /chat`
-- Document upload uses `POST /documents/upload`
-- Health dashboard uses `GET /health`
-- Trace viewer is wired to placeholder `GET /trace`
+  Method   Endpoint              Description
+  -------- --------------------- -----------------------
+  POST     `/chat`               Submit research query
+  POST     `/documents/upload`   Upload documents
+  GET      `/documents`          List documents
+  DELETE   `/documents/{id}`     Delete document
+  GET      `/health`             Service health
+  GET      `/models`             Available LLMs
 
-# Manual Changes Required
+------------------------------------------------------------------------
 
-- Set `VITE_API_BASE_URL` in `frontend/.env` for local, staging, or production.
-- Keep `BACKEND_CORS_ORIGINS` aligned with the deployed frontend origin.
-- Add a backend `/api/v1/trace` endpoint when LangGraph trace data is ready to expose.
-- Add dedicated backend health probes if the UI should report live Qdrant, PostgreSQL, and LangSmith status independently.
+## 🛣️ Roadmap
+
+-   [x] Document Retrieval
+-   [x] Live Web Search
+-   [x] Multi-LLM Support
+-   [x] Citations & Evidence
+-   [x] Health Dashboard
+-   [ ] Streaming Responses
+-   [ ] Authentication
+-   [ ] MCP Integrations
+-   [ ] Cloud Deployment
+
+------------------------------------------------------------------------
+
+## 📸 Screenshots
+
+> Screenshots and demo GIF will be added in the next release.
+
+------------------------------------------------------------------------
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+------------------------------------------------------------------------
+
+## 👨‍💻 Author
+
+**Chetan VK**
+
+B.Tech -- Artificial Intelligence & Data Science
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
