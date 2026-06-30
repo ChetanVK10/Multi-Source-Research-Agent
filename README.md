@@ -249,14 +249,14 @@ npm run dev
 
 ## 🌐 API Endpoints
 
-  Method   Endpoint              Description
-  -------- --------------------- -----------------------
-  POST     `/chat`               Submit research query
-  POST     `/documents/upload`   Upload documents
-  GET      `/documents`          List documents
-  DELETE   `/documents/{id}`     Delete document
-  GET      `/health`             Service health
-  GET      `/models`             Available LLMs
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/chat` | Submit research query |
+| POST | `/documents/upload` | Upload documents |
+| GET | `/documents` | List uploaded documents |
+| DELETE | `/documents/{id}` | Delete a document |
+| GET | `/health` | Backend health status |
+| GET | `/models` | Available LLM providers |
 
 ------------------------------------------------------------------------
 
