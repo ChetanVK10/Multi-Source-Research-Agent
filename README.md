@@ -45,19 +45,19 @@ reasoning and easy extensibility.
 
 ## ✨ Features
 
-  Feature                              Status
-  ----------------------------------- --------
-  PDF & TXT Upload                       ✅
-  Semantic Search                        ✅
-  Qdrant Vector Database                 ✅
-  Live Web Search (Tavily)               ✅
-  LangGraph Orchestration                ✅
-  Cross-Encoder Reranking                ✅
-  Multi-LLM Support (Groq & Gemini)      ✅
-  Citations & Evidence                   ✅
-  Conversation History                   ✅
-  Document Management                    ✅
-  Health Dashboard                       ✅
+| Feature | Status |
+|---------|:------:|
+| PDF & TXT Upload | ✅ |
+| Semantic Search | ✅ |
+| Qdrant Vector Database | ✅ |
+| Live Web Search (Tavily) | ✅ |
+| LangGraph Orchestration | ✅ |
+| Cross-Encoder Reranking | ✅ |
+| Multi-LLM Support (Groq & Gemini) | ✅ |
+| Citations & Evidence | ✅ |
+| Conversation History | ✅ |
+| Document Management | ✅ |
+| Health Dashboard | ✅ |
 
 ------------------------------------------------------------------------
 
@@ -177,7 +177,7 @@ README.md
 ## 🚀 Installation
 
 ``` bash
-git clone https://github.com/<username>/Multi-Source-Research-Agent.git
+git clone https://github.com/ChetanVK10/Multi-Source-Research-Agent.git
 cd Multi-Source-Research-Agent
 ```
 
