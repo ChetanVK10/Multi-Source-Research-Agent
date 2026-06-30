@@ -145,7 +145,7 @@ export function ResearchChatPage() {
         <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
           <div>
             <p className="text-sm font-semibold text-slate-100">Grounded answer workspace</p>
-            <p className="text-xs text-slate-500">Planner, retrievers, reranker, synthesizer</p>
+            <p className="text-xs text-slate-500">Planner • Retrieval • Reranking • Response Synthesis</p>
           </div>
           <button
             className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-300 transition hover:border-cyan-300/30 hover:text-cyan-200"
@@ -236,7 +236,7 @@ export function ResearchChatPage() {
           <div className="flex gap-3 rounded-lg border border-white/10 bg-background p-2 focus-within:border-cyan-300/40">
             <textarea
               className="max-h-36 min-h-12 flex-1 resize-none bg-transparent px-2 py-2 text-sm leading-6 text-slate-100 outline-none placeholder:text-slate-600"
-              placeholder="Ask about your documents, fresh web context, or connected SQL data..."
+              placeholder="Ask questions about your uploaded documents or the latest information from the web..."
               value={question}
               onChange={(event) => setQuestion(event.target.value)}
               onKeyDown={(event) => {
