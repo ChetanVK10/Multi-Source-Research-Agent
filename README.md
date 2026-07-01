@@ -45,20 +45,16 @@ reasoning and easy extensibility.
 
 ## ✨ Features
 
-| Feature | Status |
-|---------|:------:|
-| PDF & TXT Upload | ✅ |
-| Semantic Search | ✅ |
-| Qdrant Vector Database | ✅ |
-| Live Web Search (Tavily) | ✅ |
-| LangGraph Orchestration | ✅ |
-| Cross-Encoder Reranking | ✅ |
-| Multi-LLM Support (Groq & Gemini) | ✅ |
-| Citations & Evidence | ✅ |
-| Conversation History | ✅ |
-| Document Management | ✅ |
-| Health Dashboard | ✅ |
-
+| Feature | Description |
+|---------|-------------|
+| 📄 Document Ingestion | Upload and index PDF & TXT documents for semantic search. |
+| 🔍 Multi-Source Retrieval | Retrieve information from uploaded documents and the live web. |
+| 🤖 Multi-LLM Support | Generate responses using Groq or Gemini models. |
+| 🧠 Agentic Workflow | LangGraph-powered planning, retrieval, and response synthesis. |
+| 🎯 Cross-Encoder Reranking | Improve retrieval quality by reranking relevant evidence. |
+| 🔗 Grounded Responses | Generate answers backed by citations and supporting evidence. |
+| 📁 Document Management | Manage indexed documents through the application. |
+| ❤️ Health Dashboard | Monitor backend services and system status. |
 ------------------------------------------------------------------------
 
 ## 📸 Screenshots
@@ -105,63 +101,38 @@ reasoning and easy extensibility.
 
 ## 🏗️ Architecture
 
-``` mermaid
-flowchart TD
-    U[User]
-    F[React + Vite Frontend]
-    B[FastAPI Backend]
-    G[LangGraph Workflow]
-    D[Document Retriever]
-    W[Web Retriever]
-    Q[Qdrant]
-    T[Tavily Search]
-    R[Cross-Encoder Reranker]
-    S[Response Synthesizer]
-    L[Groq / Gemini]
-    A[Grounded Answer + Citations]
+```mermaid
+flowchart LR
+    U[User] --> F[React + Vite]
+    F --> B[FastAPI]
+    B --> G[LangGraph]
 
-    U-->F-->B-->G
-    G-->D-->Q
-    G-->W-->T
-    D-->R
-    W-->R
-    R-->S-->L-->A
+    G --> D[Document Retriever]
+    G --> W[Web Retriever]
+
+    D --> Q[Qdrant]
+    W --> T[Tavily]
+
+    Q --> R[Reranker]
+    T --> R
+
+    R --> L[Groq / Gemini]
+    L --> A[Grounded Answer]
 ```
-
 ------------------------------------------------------------------------
 
 ## 🛠️ Tech Stack
 
-### Frontend
-
--   React
--   TypeScript
--   Vite
-
-### Backend
-
--   FastAPI
--   LangGraph
-
-### AI
-
--   Groq
--   Gemini
--   BAAI/bge-small-en-v1.5 Embeddings
--   Cross-Encoder Reranker
-
-### Retrieval
-
--   Qdrant
--   Tavily Search
-
-### Storage
-
--   SQLite
-
-### Deployment
-
--   Docker
+| Layer | Technologies |
+|-------|--------------|
+| 🎨 **Frontend** | React • TypeScript • Vite |
+| ⚙️ **Backend** | FastAPI • LangGraph |
+| 🤖 **LLMs** | Groq • Gemini |
+| 🧠 **Embeddings** | BAAI/bge-small-en-v1.5 |
+| 🔍 **Retrieval** | Qdrant • Tavily Search |
+| 🎯 **Reranking** | Cross-Encoder |
+| 💾 **Storage** | SQLite |
+| 🚀 **Deployment** | Docker |
 
 ------------------------------------------------------------------------
 
@@ -190,16 +161,20 @@ README.md
 
 ------------------------------------------------------------------------
 
-## 🚀 Installation
+## 🚀 Quick Start
 
-``` bash
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/ChetanVK10/Multi-Source-Research-Agent.git
 cd Multi-Source-Research-Agent
 ```
 
-### Backend
+### 2. Install Dependencies
 
-``` bash
+**Backend**
+
+```bash
 python -m venv .venv
 
 # Windows
@@ -208,26 +183,18 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### Frontend
+**Frontend**
 
-``` bash
+```bash
 cd frontend
 npm install
 ```
 
-### Start Qdrant
+### 3. Configure Environment
 
-``` bash
-docker compose up -d qdrant
-```
+Create a `.env` file in the backend directory.
 
-------------------------------------------------------------------------
-
-## 🔑 Environment Variables
-
-Create a `.env` file:
-
-``` env
+```env
 GROQ_API_KEY=
 GOOGLE_API_KEY=
 TAVILY_API_KEY=
@@ -235,15 +202,15 @@ TAVILY_API_KEY=
 QDRANT_URL=http://localhost:6333
 QDRANT_API_KEY=
 
-DEFAULT_PROVIDER=gemini
-FALLBACK_PROVIDER=groq
+DEFAULT_PROVIDER=groq
+FALLBACK_PROVIDER=gemini
 ```
 
-------------------------------------------------------------------------
+### 4. Start the Application
 
-## ▶️ Run the Project
+```bash
+docker compose up -d qdrant
 
-``` bash
 # Backend
 uvicorn app.main:app --reload
 
@@ -253,26 +220,18 @@ npm run dev
 
 ------------------------------------------------------------------------
 
-## 💬 Example Queries
-
--   Summarize this uploaded research paper.
--   Compare the uploaded documents.
--   Explain Retrieval-Augmented Generation.
--   Search the web for the latest AI developments.
--   List the certifications mentioned in my resume.
-
-------------------------------------------------------------------------
-
 ## 🌐 API Endpoints
 
+The backend exposes REST APIs for document management, research queries, and system monitoring.
+
 | Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/chat` | Submit research query |
-| POST | `/documents/upload` | Upload documents |
-| GET | `/documents` | List uploaded documents |
-| DELETE | `/documents/{id}` | Delete a document |
-| GET | `/health` | Backend health status |
-| GET | `/models` | Available LLM providers |
+|:------:|----------|-------------|
+| **POST** | `/chat` | Process a research query using document and web retrieval. |
+| **POST** | `/documents/upload` | Upload and index documents for semantic search. |
+| **GET** | `/documents` | Retrieve all indexed documents. |
+| **DELETE** | `/documents/{id}` | Remove a document from the knowledge base. |
+| **GET** | `/health` | Check backend services and system status. |
+| **GET** | `/models` | List available LLM providers and models. |
 
 ------------------------------------------------------------------------
 
