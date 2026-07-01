@@ -36,7 +36,7 @@ export function DocumentUploadPage() {
       <section className="rounded-lg border border-white/10 bg-surface p-5 shadow-2xl shadow-black/20">
         <div>
           <p className="text-sm font-semibold text-slate-100">Document ingestion</p>
-          <p className="mt-1 text-sm text-slate-500">Upload files to the existing FastAPI ingestion pipeline and Qdrant indexer.</p>
+          <p className="mt-1 text-sm text-slate-500">Upload PDF, Markdown, or text documents to enable intelligent retrieval and grounded question answering.</p>
         </div>
         <label
           className={clsx(

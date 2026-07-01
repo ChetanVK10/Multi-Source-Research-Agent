@@ -62,7 +62,7 @@ export function DocumentsPage() {
       <div className="flex items-center justify-between border-b border-white/10 pb-4">
         <div>
           <h2 className="text-xl font-bold text-white">Indexed Documents</h2>
-          <p className="text-sm text-slate-400">View and manage document contexts currently stored in Qdrant.</p>
+          <p className="text-sm text-slate-400">View and manage uploaded documents.</p>
         </div>
         {documents && documents.length > 0 && (
           <button
