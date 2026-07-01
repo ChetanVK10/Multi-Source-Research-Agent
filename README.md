@@ -235,8 +235,8 @@ TAVILY_API_KEY=
 QDRANT_URL=http://localhost:6333
 QDRANT_API_KEY=
 
-DEFAULT_PROVIDER=groq
-FALLBACK_PROVIDER=gemini
+DEFAULT_PROVIDER=gemini
+FALLBACK_PROVIDER=groq
 ```
 
 ------------------------------------------------------------------------
