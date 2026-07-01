@@ -261,7 +261,43 @@ npm run dev
 
 ## 📸 Screenshots
 
-> Screenshots and demo GIF will be added in the next release.
+<table>
+  <tr>
+    <td align="center"><b>Research Workspace</b></td>
+    <td align="center"><b>Document Upload</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/home.png" alt="Research Workspace" width="500"/></td>
+    <td><img src="screenshots/upload.png" alt="Document Upload" width="500"/></td>
+  </tr>
+
+  <tr>
+    <td align="center"><b>Document Management</b></td>
+    <td align="center"><b>System Health</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/documents.png" alt="Document Management" width="500"/></td>
+    <td><img src="screenshots/health.png" alt="System Health" width="500"/></td>
+  </tr>
+
+  <tr>
+    <td align="center"><b>Resume Analysis</b></td>
+    <td align="center"><b>Research Paper Analysis</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/resume.png" alt="Resume Analysis" width="500"/></td>
+    <td><img src="screenshots/paper.png" alt="Research Paper Analysis" width="500"/></td>
+  </tr>
+
+  <tr>
+    <td align="center"><b>Annual Report Analysis</b></td>
+    <td align="center"><b>Live Web Search</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/report.png" alt="Annual Report Analysis" width="500"/></td>
+    <td><img src="screenshots/web-search.png" alt="Live Web Search" width="500"/></td>
+  </tr>
+</table>
 
 ------------------------------------------------------------------------
 
