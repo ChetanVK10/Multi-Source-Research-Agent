@@ -101,25 +101,12 @@ reasoning and easy extensibility.
 
 ## 🏗️ Architecture
 
-```mermaid
-flowchart LR
-    U[User] --> F[React + Vite]
-    F --> B[FastAPI]
-    B --> G[LangGraph]
+The system orchestrates document retrieval, live web search, reranking, and response synthesis using a LangGraph-based workflow.
 
-    G --> D[Document Retriever]
-    G --> W[Web Retriever]
+<p align="center">
+  <img src="screenshots/Architecture.png" alt="Multi-Source Research Agent Architecture" width="900"/>
+</p>
 
-    D --> Q[Qdrant]
-    W --> T[Tavily]
-
-    Q --> R[Reranker]
-    T --> R
-
-    R --> L[Groq / Gemini]
-    L --> A[Grounded Answer]
-```
-------------------------------------------------------------------------
 
 ## 🛠️ Tech Stack
 
